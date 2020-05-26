@@ -18,18 +18,23 @@ const initialState = [
     }
 ];
 
-export const reducer = (state, action) => {
+
+export const reducerTodos = (state = [], action) => {
     switch(action.type) {
         case 'ADD_TASK':
             return { 
-
+                ...state,
+                item: action.payload,
+                completed: false,
+                id: Date.now(),
             }
-        case 'CLEAR_TASKS':
-            return {
-
-            }
+        case 'TOGGLE_TODO':
+            return state.map(todo => 
+                todo.item === action.item ? {...todo, completed: !todo.completed } : todo
+                )
         default:
             return state;
     }
 }
 
+export default reducer
